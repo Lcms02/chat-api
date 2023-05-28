@@ -1,6 +1,7 @@
-const salaModel = require('../model/salaModel')
+const { Timestamp } = require('mongodb');
+const salaModel = require('../model/salaModel');
 
-exports.get = async (req, res) => {
+exports.get = async(req, res)=>{
     return await salaModel.listarSalas();
 }
 

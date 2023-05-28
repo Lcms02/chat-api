@@ -15,20 +15,24 @@ async function connect() {
     return singleton;
 }
 
-async function findAll(collection) {
+let findAll = async (collection) => {
     const db = await connect();
-    return db.collection(collection).findAll().toArray();
+    return await db.collection(collection).find().toArray();
 }
 
-module.exports = {
-    findAll
+async function insertOne(collection, object) {
+    const db = await connect();
+    let result = await db.collection(collection).insertOne(object);
+
+    return result;
 }
 
-let findOne = async (collection, id) => {
+let findOne = async (collection, _id) => {
     const db = await connect();
     let obj = await db.collection(collection).find({
-        '_id': new ObjectId(id)
+        '_id': new ObjectId(_id)
     }).toArray();
+    console.log("obj: " + obj)
     if (obj)
         return obj[0];
     return false;
@@ -41,4 +45,11 @@ let updateOne = async (collection, objeto, param) => {
     });
 
     return result;
+}
+
+module.exports = {
+    findAll,
+    insertOne,
+    findOne,
+    updateOne
 }

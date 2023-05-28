@@ -1,16 +1,12 @@
 const db = require("./db");
 
-function listarSalas() {
-    let salas =  db.findAll("salas");
-    return salas;
-}
-
-module.exports = {
-    listarSalas
-}
-
 let buscarSala = async (idsala) => {
     return db.findOne("salas",idsala);
+}
+
+let listarSalas = async () => {
+    let salas =  db.findAll("salas");
+    return salas;
 }
 
 let atualizarMensagens = async (sala) => {
@@ -29,4 +25,11 @@ let buscarMensagens = async (idsala, timestamp) => {
         return msgs;
     }
     return [];
+}
+
+module.exports = {
+    buscarSala,
+    listarSalas,
+    atualizarMensagens,
+    buscarMensagens
 }
