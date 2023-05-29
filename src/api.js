@@ -35,14 +35,10 @@ app.use('/entrar', router.post('/entrar', async (req, res, next) => {
 }));
 
 app.use('/salas', router.get('/salas', async (req, res, next) => {
-    if (await tokenUtil.checktoken(req.headers.token, req.headers.idUser, req.headers.timestamp)) {
+   
         let resp = await salaController.get();
         res.send(resp);
-    } else {
-        res.send({
-            "msg": "erro, usuário não autenticado"
-        });
-    }
+    
 }));
 
 app.use('/salas/entrar', router.get('/salas/entrar', async (req, res, next) => {
